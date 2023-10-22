@@ -1,6 +1,6 @@
 # hub
 
-This will be the landing page for my aws hosted site. From here, I'll link out to other applications I use.
+This is a landing page for my aws hosted site. From here, I'll link out to other applications I build and use.
 
 ## What is it
 
