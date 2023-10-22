@@ -13,8 +13,8 @@ export default function Home() {
         <>
           <ApplicationList applications={applications} />
           <div className="mx-auto my-4 max-w-[600px] rounded-xl border-2 border-white/30">
-            <h4 className="text-center uppercase">Create a new app</h4>
             {/* TODO: Turn off since there is no route specific security yet */}
+            {/* <h4 className="text-center uppercase">Create a new app</h4> */}
             {/* <ApplicationForm application={null} /> */}
           </div>
         </>
