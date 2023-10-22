@@ -3,18 +3,18 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { applicationSchema } from "~/types";
 
 export const applicationRouter = createTRPCRouter({
-  create: publicProcedure
-    .input(applicationSchema)
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.application.create({
-        data: {
-          name: input.name,
-          description: input.description,
-          url: input.url,
-        },
-      });
-    }),
-
+  // TODO: Turn off since there is no route specific security yet
+  // create: publicProcedure
+  //   .input(applicationSchema)
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.db.application.create({
+  //       data: {
+  //         name: input.name,
+  //         description: input.description,
+  //         url: input.url,
+  //       },
+  //     });
+  //   }),
   readAll: publicProcedure.query(async ({ ctx }) => {
     return ctx.db.application.findMany({
       orderBy: { name: "asc" },
@@ -33,35 +33,35 @@ export const applicationRouter = createTRPCRouter({
         },
       });
     }),
-  update: publicProcedure
-    .input(applicationSchema)
-    .mutation(async ({ ctx, input }) => {
-      if (!input.id) {
-        throw new Error("Unable to update application without an id");
-      }
+  // update: publicProcedure
+  //   .input(applicationSchema)
+  //   .mutation(async ({ ctx, input }) => {
+  //     if (!input.id) {
+  //       throw new Error("Unable to update application without an id");
+  //     }
 
-      return ctx.db.application.update({
-        where: {
-          id: input.id,
-        },
-        data: {
-          name: input.name,
-          description: input.description,
-          url: input.url,
-        },
-      });
-    }),
-  delete: publicProcedure
-    .input(
-      z.object({
-        id: z.string(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.application.delete({
-        where: {
-          id: input.id,
-        },
-      });
-    }),
+  //     return ctx.db.application.update({
+  //       where: {
+  //         id: input.id,
+  //       },
+  //       data: {
+  //         name: input.name,
+  //         description: input.description,
+  //         url: input.url,
+  //       },
+  //     });
+  //   }),
+  // delete: publicProcedure
+  //   .input(
+  //     z.object({
+  //       id: z.string(),
+  //     }),
+  //   )
+  //   .mutation(async ({ ctx, input }) => {
+  //     return ctx.db.application.delete({
+  //       where: {
+  //         id: input.id,
+  //       },
+  //     });
+  //   }),
 });

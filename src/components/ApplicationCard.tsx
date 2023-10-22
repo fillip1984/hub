@@ -11,14 +11,14 @@ export default function ApplicationCard({
 }: {
   application: ApplicationSchemaType;
 }) {
-  const [menuShown, setMenuShown] = useState(false);
+  // const [menuShown, setMenuShown] = useState(false);
 
-  const utils = api.useUtils();
-  const deleteApplication = api.application.delete.useMutation({
-    onSuccess: () => {
-      void utils.application.invalidate();
-    },
-  });
+  // const utils = api.useUtils();
+  // const deleteApplication = api.application.delete.useMutation({
+  //   onSuccess: () => {
+  //     void utils.application.invalidate();
+  //   },
+  // });
 
   return (
     <Link
@@ -26,7 +26,8 @@ export default function ApplicationCard({
       className="relative min-h-[200px] rounded border p-2 transition duration-300 ease-in-out hover:bg-white/10">
       <div className="flex items-center justify-between">
         <h4>{application.name}</h4>
-        <button
+        {/* TODO: Turn off since there is no route specific security yet */}
+        {/* <button
           type="button"
           onClick={(e) => {
             e.preventDefault();
@@ -35,10 +36,10 @@ export default function ApplicationCard({
           }}
           className="rounded-full bg-white/5 p-2 transition duration-300 ease-in-out hover:bg-white/40">
           <FaEllipsisVertical />
-        </button>
+        </button> */}
       </div>
 
-      {menuShown && (
+      {/* {menuShown && (
         <div
           onClick={(e) => {
             e.preventDefault();
@@ -69,7 +70,7 @@ export default function ApplicationCard({
             Delete
           </button>
         </div>
-      )}
+      )} */}
 
       <p>{application.description}</p>
     </Link>

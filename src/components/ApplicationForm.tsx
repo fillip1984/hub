@@ -34,26 +34,26 @@ export function ApplicationForm({
 
   const onSubmit: SubmitHandler<ApplicationSchemaType> = (formData) => {
     if (application?.id) {
-      updateApplication.mutate(formData);
+      // updateApplication.mutate(formData);
     } else {
-      createApplication.mutate(formData);
+      // createApplication.mutate(formData);
     }
   };
 
-  const util = api.useUtils();
-  const createApplication = api.application.create.useMutation({
-    onSuccess: () => {
-      void util.application.invalidate();
-      reset();
-    },
-  });
-  const router = useRouter();
-  const updateApplication = api.application.update.useMutation({
-    onSuccess: () => {
-      void util.application.invalidate();
-      void router.push("/");
-    },
-  });
+  // const util = api.useUtils();
+  // const createApplication = api.application.create.useMutation({
+  //   onSuccess: () => {
+  //     void util.application.invalidate();
+  //     reset();
+  //   },
+  // });
+  // const router = useRouter();
+  // const updateApplication = api.application.update.useMutation({
+  //   onSuccess: () => {
+  //     void util.application.invalidate();
+  //     void router.push("/");
+  //   },
+  // });
 
   return (
     <form
@@ -99,8 +99,9 @@ export function ApplicationForm({
       <button
         type="submit"
         className="w-full rounded bg-white/10 px-10 py-3 font-semibold uppercase transition hover:enabled:bg-white/20"
-        disabled={createApplication.isLoading}>
-        {createApplication.isLoading ? "Saving..." : "Save"}
+        // disabled={createApplication.isLoading}
+      >
+        {/* {createApplication.isLoading ? "Saving..." : "Save"} */}
       </button>
     </form>
   );
