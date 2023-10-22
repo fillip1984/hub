@@ -21,12 +21,18 @@ export default function ApplicationCard({
   });
 
   return (
-    <div className="relative min-h-[200px] rounded border p-2">
+    <Link
+      href={application.url}
+      className="relative min-h-[200px] rounded border p-2 transition duration-300 ease-in-out hover:bg-white/10">
       <div className="flex items-center justify-between">
         <h4>{application.name}</h4>
         <button
           type="button"
-          onClick={() => setMenuShown((prev) => !prev)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMenuShown((prev) => !prev);
+          }}
           className="rounded-full bg-white/5 p-2 transition duration-300 ease-in-out hover:bg-white/40">
           <FaEllipsisVertical />
         </button>
@@ -34,7 +40,11 @@ export default function ApplicationCard({
 
       {menuShown && (
         <div
-          onClick={() => setMenuShown((prev) => !prev)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMenuShown((prev) => !prev);
+          }}
           className="fixed inset-0 z-[900]"></div>
       )}
 
@@ -49,10 +59,11 @@ export default function ApplicationCard({
           </Link>
           <button
             type="button"
-            // not sure why but it application.id truthy check above is still causing linting issues here
-            onClick={() =>
-              application.id && deleteApplication.mutate({ id: application.id })
-            }
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              deleteApplication.mutate({ id: application.id! });
+            }}
             className="flex transform items-center gap-2 rounded px-2 py-1 text-danger duration-300 ease-in-out hover:bg-danger hover:text-white">
             <FaTrash />
             Delete
@@ -61,6 +72,6 @@ export default function ApplicationCard({
       )}
 
       <p>{application.description}</p>
-    </div>
+    </Link>
   );
 }

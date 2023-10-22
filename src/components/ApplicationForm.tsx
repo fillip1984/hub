@@ -2,10 +2,16 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useEffect } from "react";
 import { applicationSchema, type ApplicationSchemaType } from "~/types";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
-export function CreateApplication() {
+export function ApplicationForm({
+  application,
+}: {
+  application: ApplicationSchemaType | null;
+}) {
   const {
     register,
     handleSubmit,
@@ -15,8 +21,23 @@ export function CreateApplication() {
     resolver: zodResolver(applicationSchema),
   });
 
+  useEffect(() => {
+    if (application) {
+      reset({
+        id: application.id,
+        name: application.name,
+        description: application.description,
+        url: application.url,
+      });
+    }
+  }, [application, reset]);
+
   const onSubmit: SubmitHandler<ApplicationSchemaType> = (formData) => {
-    createApplication.mutate(formData);
+    if (application?.id) {
+      updateApplication.mutate(formData);
+    } else {
+      createApplication.mutate(formData);
+    }
   };
 
   const util = api.useUtils();
@@ -26,12 +47,18 @@ export function CreateApplication() {
       reset();
     },
   });
+  const router = useRouter();
+  const updateApplication = api.application.update.useMutation({
+    onSuccess: () => {
+      void util.application.invalidate();
+      void router.push("/");
+    },
+  });
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto my-4 flex max-w-[600px] flex-col items-center gap-2 rounded-xl border-2 border-white/30 p-2">
-      <h4 className="uppercase">Create new app</h4>
+      className="flex flex-col items-center gap-2 p-2">
       <div className="w-full">
         <input
           type="text"

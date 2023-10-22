@@ -17,9 +17,40 @@ export const applicationRouter = createTRPCRouter({
 
   readAll: publicProcedure.query(async ({ ctx }) => {
     return ctx.db.application.findMany({
-      orderBy: { name: "desc" },
+      orderBy: { name: "asc" },
     });
   }),
+  readOne: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      return ctx.db.application.findFirst({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
+  update: publicProcedure
+    .input(applicationSchema)
+    .mutation(async ({ ctx, input }) => {
+      if (!input.id) {
+        throw new Error("Unable to update application without an id");
+      }
+
+      return ctx.db.application.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          name: input.name,
+          description: input.description,
+          url: input.url,
+        },
+      });
+    }),
   delete: publicProcedure
     .input(
       z.object({
