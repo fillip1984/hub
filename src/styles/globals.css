@@ -5,8 +5,8 @@
     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --color-background: "#F0F0F0";
-  --color-foreground: "#1A1A1A";
+  --color-background: #312c2c;
+  --color-foreground: #1a1a1a;
 }
 
 @layer base {
