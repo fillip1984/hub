@@ -13,7 +13,7 @@ export default $config({
   async run() {
     // tags?
     new sst.aws.Nextjs("hub", {
-      domain: { name: "hub.illizen.com" },
+      domain: "hub.illizen.com",
       server: {
         runtime: "nodejs22.x",
       },
