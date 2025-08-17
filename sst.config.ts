@@ -14,6 +14,9 @@ export default $config({
     // tags?
     new sst.aws.Nextjs("hub", {
       domain: { name: "hub.illizen.com" },
+      environment: {
+        DATABASE_URL: process.env.DATABASE_URL ?? "unknown",
+      },
     });
   },
 });
