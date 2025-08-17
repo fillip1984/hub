@@ -11,7 +11,6 @@ export default $config({
     };
   },
   async run() {
-    console.log({ db_url: process.env.DATABASE_URL });
     // tags?
     new sst.aws.Nextjs("hub", {
       domain: { name: "hub.illizen.com" },
