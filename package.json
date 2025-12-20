@@ -11,9 +11,10 @@
     "dev": "next dev",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "prod:db:push": "dotenv -e .env.prod -- npx prisma db push",
-    "prod:deploy": "dotenv -e .env.prod -- npx sst deploy --stage prod",
-    "start": "next start"
+    "prod:db:push": "dotenv -e .env.prod -- prisma db push",
+    "prod:deploy": "dotenv -e .env.prod -- sst deploy --stage prod",
+    "start": "next start",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
@@ -50,5 +51,5 @@
   "ct3aMetadata": {
     "initVersion": "7.39.3"
   },
-  "packageManager": "npm@10.3.0"
+  "packageManager": "pnpm@10.26.1"
 }
