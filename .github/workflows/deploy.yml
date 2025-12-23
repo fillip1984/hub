@@ -29,7 +29,7 @@ jobs:
       # does not significantly speed up the build time in this monorepo setup.
       # Therefore, the NextJs cache step is commented out for now.
       # Numbers were, ~ 24s to restore it and ~ 40s to save it so close to 1m to
-      # maintain the cache and the build is only taking ~ 40s.
+      # maintain the cache and the build is only taking ~ 9s.
       # - name: Restore NextJs cache
       #   uses: actions/cache@v4
       #   with:
@@ -40,20 +40,12 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
-      - name: Build only
+      - name: Build and Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DATABASE_SCHEMA: "hub"
         run: |
-          pnpm build
-
-      # - name: Build and Deploy
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      #     DATABASE_SCHEMA: "hub"
-      #   run: |
-      #     pnpx sst deploy --stage prod
+          pnpm db:generate
+          pnpx sst deploy --stage prod
