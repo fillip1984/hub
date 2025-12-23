@@ -47,5 +47,4 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DATABASE_SCHEMA: "hub"
         run: |
-          pnpm db:generate
           pnpx sst deploy --stage prod
