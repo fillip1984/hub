@@ -19,6 +19,7 @@ export default $config({
       },
       environment: {
         DATABASE_URL: process.env.DATABASE_URL ?? "unknown",
+        DATABASE_SCHEMA: process.env.DATABASE_SCHEMA ?? "public",
       },
     });
   },
