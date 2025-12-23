@@ -8,6 +8,7 @@ export default {
   schemaFilter: [env.DATABASE_SCHEMA || "public"],
   dbCredentials: {
     url: env.DATABASE_URL,
+    ssl: "require",
   },
 } satisfies Config;
 
