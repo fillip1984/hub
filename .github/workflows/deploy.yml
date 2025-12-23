@@ -40,7 +40,7 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
-      - name: Build and Deploy
+      - name: Build only
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -48,4 +48,12 @@ jobs:
           DATABASE_SCHEMA: "hub"
         run: |
           pnpm build
-          pnpx sst deploy --stage prod
+
+      # - name: Build and Deploy
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      #     DATABASE_SCHEMA: "hub"
+      #   run: |
+      #     pnpx sst deploy --stage prod
