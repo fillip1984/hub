@@ -10,6 +10,7 @@ export default {
     url: env.DATABASE_URL,
     ssl: "require",
   },
+  casing: "camelCase",
 } satisfies Config;
 
 // import { defineConfig } from "drizzle-kit";
