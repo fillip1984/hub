@@ -1,6 +1,7 @@
-import "@/styles/globals.css"
-
+import { FloatingThemeToggle } from "@/components/theme/floating-theme-toggle"
+import { ThemeProvider } from "@/components/theme/theme-provider"
 import { cn } from "@/lib/utils"
+import "@/styles/globals.css"
 import { type Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
 
@@ -20,7 +21,17 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <FloatingThemeToggle />
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
