@@ -1,16 +1,25 @@
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTypescript from "eslint-config-next/typescript";
+import nextVitals from "eslint-config-next/core-web-vitals"
+import nextTs from "eslint-config-next/typescript"
+import { defineConfig, globalIgnores } from "eslint/config"
 
-const nextEslint10 = nextVitals.map((config) => ({
-  ...config,
-  rules: Object.fromEntries(
-    Object.entries(config.rules ?? {}).filter(
-      ([rule]) =>
-        !rule.startsWith("react/") && !rule.startsWith("react-hooks/"),
-    ),
-  ),
-}));
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  {
+    settings: {
+      // temporary fix for https://github.com/jsx-eslint/eslint-plugin-react/issues/3977, see also: https://github.com/jsx-eslint/eslint-plugin-react/issues/4018
+      react: { version: "19.3" }, // Avoids auto-detection crash
+    },
+  },
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "sst-env.d.ts",
+  ]),
+])
 
-const eslintConfig = [...nextEslint10, ...nextTypescript];
-
-export default eslintConfig;
+export default eslintConfig

@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import type { ApplicationSummaryType } from "~/trpc/types";
+import type { Application } from "@/server/db/schema";
 
 export default function ApplicationCard({
   application,
 }: {
-  application: ApplicationSummaryType;
+  application: Application;
 }) {
   return (
     <Link

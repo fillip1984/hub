@@ -1,34 +1,38 @@
-import { type Config } from "drizzle-kit";
+import type { Config } from "drizzle-kit"
 
-import { env } from "~/env";
+import { env } from "@/env"
+
+// having trouble making postgres support both local (doesn't support ssl) and remote (which requires ssl)...
+const databaseUrl = new URL(env.DATABASE_URL)
+type DBCredentials =
+  | {
+      host: string
+      port: number
+      user: string
+      password: string
+      database: string
+      ssl: "require" | "prefer"
+    }
+  | {
+      url: string
+    }
+
+const dbCredentials: DBCredentials = databaseUrl.hostname.includes("localhost")
+  ? {
+      url: env.DATABASE_URL,
+    }
+  : {
+      host: databaseUrl.hostname,
+      port: databaseUrl.port ? Number(databaseUrl.port) : 5432,
+      user: decodeURIComponent(databaseUrl.username),
+      password: decodeURIComponent(databaseUrl.password),
+      database: databaseUrl.pathname.replace(/^\//, ""),
+      ssl: "require",
+    }
 
 export default {
-  dialect: "postgresql",
   schema: "./src/server/db/schema.ts",
-  schemaFilter: [env.DATABASE_SCHEMA || "public"],
-  dbCredentials: {
-    url: env.DATABASE_URL,
-    ssl: "require",
-  },
-} satisfies Config;
-
-// import { defineConfig } from "drizzle-kit";
-
-// export default defineConfig({
-//   dialect: "postgresql",
-//   out: "./src/drizzle",
-//   schema: "./src/drizzle/schema.ts",
-//   schemaFilter: [process.env.DATABASE_SCHEMA || "public"],
-//   dbCredentials: {
-//     // host: process.env.DB_HOST!,
-//     // port: Number(process.env.DB_PORT!),
-//     // user: process.env.DB_USERNAME!,
-//     // password: process.env.DB_PASSWORD!,
-//     // database: process.env.DB_NAME!,
-//     url: process.env.DATABASE_URL!,
-//   },
-//   // Print all statements
-//   verbose: true,
-//   // Always ask for confirmation
-//   strict: true,
-// });
+  dialect: "postgresql",
+  dbCredentials,
+  schemaFilter: [env.DATABASE_SCHEMA],
+} satisfies Config

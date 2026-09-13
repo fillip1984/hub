@@ -27,17 +27,18 @@
     "incremental": true,
     /* Path Aliases */
     "paths": {
-      "~/*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
     "next-env.d.ts",
+    "next.config.ts",
+    "**/*.js",
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
-    "**/*.js",
+    "**/*.mjs",
     ".next/types/**/*.ts",
-    "postcss.config.mjs",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules", "sst.config.ts"]
