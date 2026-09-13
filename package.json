@@ -5,14 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "pnpm lint && pnpm typecheck && next build",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "prod:db:migrate": "dotenv -e .env.prod -- drizzle-kit migrate",
+    "prod:db:push": "dotenv -e .env.prod -- drizzle-kit push",
     "prod:deploy": "dotenv -e .env.prod -- sst deploy --stage prod",
     "start": "next start",
     "preinstall": "npx only-allow pnpm"
