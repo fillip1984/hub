@@ -1,5 +1,5 @@
 import { getApplications } from "@/server/services/application-service"
-import ApplicationCard from "./_components/ApplicationCard"
+import ApplicationCard from "./_components/application-card"
 
 export default async function Home() {
   const applications = await getApplications()
