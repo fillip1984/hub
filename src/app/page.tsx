@@ -1,9 +1,5 @@
-import { db } from "@/server/db"
+import { getApplications } from "@/server/services/application-service"
 import ApplicationCard from "./_components/ApplicationCard"
-
-async function getApplications() {
-  return await db.query.applications.findMany()
-}
 
 export default async function Home() {
   const applications = await getApplications()

@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import type { Application } from "@/server/db/schema";
+import type { Application } from "@/server/db/schema"
 
 export default function ApplicationCard({
   application,
 }: {
-  application: Application;
+  application: Application
 }) {
   return (
     <Link
@@ -17,5 +17,5 @@ export default function ApplicationCard({
         <p>{application.description}</p>
       </div>
     </Link>
-  );
+  )
 }
