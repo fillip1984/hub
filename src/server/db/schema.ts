@@ -1,15 +1,12 @@
-import { pgSchema, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { env } from "~/env";
+import { text } from "drizzle-orm/pg-core"
+import { baseFields, baseSchema } from "./base"
 
-const hubSchema = pgSchema(env.DATABASE_SCHEMA || "public");
-
-export const applications = hubSchema.table("application", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at")
-    .defaultNow()
-    .$onUpdate(() => new Date()),
+export const applications = baseSchema.table("application", {
+  ...baseFields,
   name: text("name").notNull(),
   description: text("description").notNull(),
   url: text("url").notNull(),
-});
+})
+
+export type Application = typeof applications.$inferSelect
+export type NewApplication = typeof applications.$inferInsert
