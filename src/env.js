@@ -9,6 +9,11 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.url(),
     DATABASE_SCHEMA: z.string().min(1),
+    AUTH_SECRET: z.string().min(32),
+    AUTH_URL: z.url().min(1),
+    AUTH_DISABLE_SIGN_UPS: z.stringbool(),
+    AUTH_GOOGLE_ID: z.string().min(1),
+    AUTH_GOOGLE_SECRET: z.string().min(1),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -30,6 +35,11 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     DATABASE_SCHEMA: process.env.DATABASE_SCHEMA,
+    AUTH_SECRET: process.env.AUTH_SECRET,
+    AUTH_URL: process.env.AUTH_URL,
+    AUTH_DISABLE_SIGN_UPS: process.env.AUTH_DISABLE_SIGN_UPS,
+    AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+    AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },

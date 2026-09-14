@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2"
 import { snakeCase, text, timestamp } from "drizzle-orm/pg-core"
-import { env } from "../../env"
+import { env } from "../../../env"
 
 /**
  * Table schema is used to separate different applications using the same database.

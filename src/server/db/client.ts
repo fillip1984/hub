@@ -4,7 +4,8 @@ import postgres from "postgres"
 
 import { env } from "@/env"
 
-import * as schema from "./schema"
+import * as appSchema from "./schema/app-schema"
+import * as authSchema from "./schema/auth-schema"
 
 const client = postgres(env.DATABASE_URL, {
   prepare: false,
@@ -22,6 +23,9 @@ const client = postgres(env.DATABASE_URL, {
 
 export const db = drizzle({
   client: client,
-  relations: defineRelations(schema),
+  relations: defineRelations({
+    ...appSchema,
+    ...authSchema,
+  }),
   logger: env.DATABASE_URL.includes("localhost") ? false : true,
 })
