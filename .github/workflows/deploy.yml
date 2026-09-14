@@ -25,5 +25,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DATABASE_SCHEMA: "hub"
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_GOOGLE_ID: ${{ secrets.AUTH_GOOGLE_ID }}
+          AUTH_GOOGLE_SECRET: ${{ secrets.AUTH_GOOGLE_SECRET }}
+          AUTH_DISABLE_SIGN_UPS: false
+
         run: |
           pnpx sst deploy --stage prod
