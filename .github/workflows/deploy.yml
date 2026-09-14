@@ -30,6 +30,7 @@ jobs:
           AUTH_GOOGLE_ID: ${{ secrets.AUTH_GOOGLE_ID }}
           AUTH_GOOGLE_SECRET: ${{ secrets.AUTH_GOOGLE_SECRET }}
           AUTH_DISABLE_SIGN_UPS: false
+          AUTH_URL: "https://hub.illizen.com"
 
         run: |
           pnpx sst deploy --stage prod
